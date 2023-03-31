@@ -1,7 +1,7 @@
 ## First Lego League code
 Code for our robotics team using LEGO SPIKE Prime and <a href="https://github.com/sanjayseshan/spikeprime-vscode">spikeprime-vscode</a>.\
 The program deals with all of the logic and creates a simple to use robot control environment.\
-It's quite simple, even our 4th graders could figure it out!\
+It's quite simple, even our 4th graders use it!\
 **(This readme is early stage and is missing a lot of critical information.)**
 
 ### How do I use it?
@@ -33,4 +33,32 @@ The internal menu gives us direct control over the and has a slight performance 
 TODO
 
 ### How do I connect to the robot?
-TODO
+#### Windows & bluetooth
+It should work in windows right away without any weird issues.\
+Just pair to the robot and in vscode, some COM devices should appear.\
+Try them all, the right one will beep.
+
+#### Windows & usb
+Haven't used it. Probably is super simple.
+
+#### Linux & bluetooth
+With linux it's a bit more tricky.\
+First pair to the robot through your regular interface.\
+Then you need to figure out the bluetooth address of your robot.\
+It looks something like this: ```XX:XX:XX:XX:XX:XX```
+
+Now the most **important** part:\
+You have to create a rfcomm device with this command: (replace bluetooth address)\
+```sudo rfcomm bind /dev/rfcomm0 XX:XX:XX:XX:XX:XX 1```\
+**NB!** You need to execute this command every time you **reboot**!!\
+You probably need to install: ```bluez-deprecated```
+
+Now in the vscode spike connect menu, clicking ```/dev/rfcomm0``` should work.
+
+#### Linux & usb
+Once you plug the usb to the robot, the linux kernel should create a device ```/dev/ttyACM0``` or similar.\
+Through vscode menu, select ```/dev/ttyACM0``` and it should connect right away without issues.
+
+#### macOS
+Both types should be very similar to Linux.
+
